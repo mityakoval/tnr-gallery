@@ -1,0 +1,9 @@
+%h1 Add a new artist
+
+= form_for [:admin, @artist], class: 'form' do |f|
+  - flash.each do |message_type, message|
+    %div{:class => "alert alert-#{message_type}"}= message
+  = f.text_field :name, class: 'form-control', placeholder: 'Name'
+  = f.text_field :name, class: 'form-control', placeholder: 'Description'
+  = f.button "Create", class: "btn btn-success"
+  

@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title TNR Gallery | Admin
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    #mainContainer.container
+      = render 'layouts/admin_header'
+      .modal.fade#newArtistModal{:role => "dialog", :tabindex => "-1"}
+        .modal-dialog{:role => "document"}
+          .modal-content
+            .modal-header
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} &#215;
+              %h4.modal-title Add a new artist
+            .modal-body
+              .errors
+                - flash.each do |message_type, message|
+                  %div{:class => "alert alert-#{message_type}"}= message
+              %input.form-control#artist_name{ placeholder: 'Name', type: 'text'}
+              %textarea.form-control#artist_description{ placeholder: 'Description', rows: 4}
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              %button.btn.btn-success#createArtistButton{:type => "button"} Create artist
+      = yield

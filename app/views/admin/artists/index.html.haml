@@ -1,0 +1,6 @@
+- if @artists.empty?
+  .empty-container
+    %p No artists were created yet
+- else
+  - @artists.each do |artist|
+    %p= artist.name

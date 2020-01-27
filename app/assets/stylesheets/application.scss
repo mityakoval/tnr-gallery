@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+ 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.header {
+  display: block;
+  text-align: center;
+  
+  #artistList {
+    text-align: center;
+    .artist {
+      float: none;
+      display: inline-block;
+      a {
+        color: black;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        border-radius: 0;
+      }
+    }
+  }
+  
+  .logo-container {
+    width: 100%;
+    text-align: center;
+    
+    .logo {
+      height: auto;
+      img {
+        width: 125px;
+      }
+    }
+  }
+}
