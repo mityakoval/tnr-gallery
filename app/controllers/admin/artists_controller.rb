@@ -18,6 +18,7 @@ class Admin::ArtistsController < AdminController
       if artist.save
         format.html { redirect_to admin_artist_url(id: artist.id) }
         format.json { render json: { redirect: admin_artist_url(id: artist.id) } }
+        
       else
         format.html do
           flash[:danger] = artist.errors.full_messages.join("\n")
