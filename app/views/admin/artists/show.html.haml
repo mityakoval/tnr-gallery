@@ -1,2 +1,17 @@
-<h1>Admin::Artists#show</h1>
-<p>Find me in app/views/admin/artists/show.html.erb</p>
+.artist-info
+  %h1.name= @artist.name
+  .controls
+    %p 
+      (
+      = link_to "Edit", admin_edit_artist_path(id: @artist.id)
+      |
+      = link_to "Delete", admin_delete_artist_path(id: @artist.id), method: :delete, class: 'danger', confirm: 'Are you sure'
+      ) 
+  .description
+    %p= @artist.description
+  .artworks
+    %h2 Artworks
+    - @artist.artworks.each do |artwork|
+      %figure
+        = image_tag artwork.picture.variant(resize: '500')
+      %figcaption= artwork.name

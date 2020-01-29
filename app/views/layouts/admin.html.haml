@@ -24,5 +24,6 @@
               %textarea.form-control#artist_description{ placeholder: 'Description', rows: 4}
             .modal-footer
               %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-              %button.btn.btn-success#createArtistButton{:type => "button"} Create artist
+              %button.btn.btn-black#createArtistButton{:type => "button"} Create artist
+      -# = render "layouts/breadcrumbs"
       = yield

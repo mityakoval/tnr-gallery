@@ -14,6 +14,7 @@
 //= require rails-ujs
 //= require bootstrap
 //= require turbolinks
+//= require activestorage
 //= require_tree .
 
 function invoke(url, method, data, success, error){

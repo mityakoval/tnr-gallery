@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-#newArtistModal {
+.modal {
   .modal-body {
     padding: 15px 25px;
     
@@ -12,6 +12,67 @@
       &:last-child {
         margin-bottom: 0;
       }
+    }
+  }
+}
+
+.edit-artist {
+  margin-top: 100px;
+  display: block;
+  width: 40%;
+  
+  form {
+    .form-control {
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 0;
+      border-bottom: 3px black solid;
+      box-shadow: none;
+      resize: none;
+      color: black;
+      padding: 25px 10px;
+      transition: .2s;
+      
+      &::placeholder {
+        color: #656565;
+      }
+      
+      &:focus {
+        border: none;
+        border-radius: 0;
+        border-bottom: 5px black solid;
+        box-shadow: none;
+      }
+    }
+    
+    .edit-artist-name {
+      font-size: 36px;
+    }
+    
+    .btn {
+      margin-top: 20px;
+    }  
+  }
+  
+  .artist-artworks {
+    margin-top: 50px;
+    
+    #addArtworkButton {
+      margin-top: 20px;
+    }
+  }
+}
+
+.artist-info, .artwork-info {
+  margin-top: 100px;
+  display: block;
+  width: 50%;
+  
+  .controls, .description {
+    margin-bottom: 20px;
+    
+    p {
+      margin-left: 10px;
     }
   }
 }

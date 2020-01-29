@@ -1,2 +1,33 @@
-<h1>Admin::Artists#edit</h1>
-<p>Find me in app/views/admin/artists/edit.html.erb</p>
+.modal.fade#addArtworkModal{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+        %h4.modal-title Add a new artwork
+      = form_with model: @new_artwork, url: admin_artworks_url(artist_id: @artist.id) do |f| 
+        .modal-body
+          .errors
+            - flash.each do |message_type, message|
+              %div{:class => "alert alert-#{message_type}"}= message
+          = f.text_field :name, class: 'form-control', placeholder: 'Name'
+          -# %input.form-control#artwork_name{ placeholder: 'Name', type: 'text'}
+          = f.text_area :description, class: 'form-control', placeholder: 'Description'
+          -# %textarea.form-control#artwork_description{ placeholder: 'Description', rows: 4}
+          = f.file_field :picture, multiple: false, direct_upload: true
+          -# %input.form-control#artwork_picture{ placeholder: 'Picture', type: 'file'}
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          = f.submit class: 'btn btn-black'
+.edit-artist
+  = form_for [:admin, @artist] do |f|
+    .errors
+      - flash.each do |message_type, message|
+        %div{:class => "alert alert-#{message_type}"}= message
+    = f.text_field :name, class: 'form-control edit-artist-name', placeholder: 'Name'
+    = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
+    = link_to "Cancel", admin_artist_path(id: @artist.id), class: 'btn btn-default cancel'
+    = f.button "Save", class: 'btn btn-black'
+  .artist-artworks
+    %h2 Artworks
+    %button.btn.btn-black#addArtworkButton{ data: { toggle: 'modal', target: '#addArtworkModal' }} Add an artwork
