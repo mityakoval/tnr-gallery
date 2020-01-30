@@ -32,6 +32,17 @@ module TnrGallery
     # Don't generate system test files.
     config.generators.system_tests = nil
     
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource(
+          '*',
+          headers: :any,
+          methods: [:get, :patch, :put, :delete, :post, :options]
+          )
+      end
+    end
+    
     config.generators do |g|
       g.template_engine :haml
     end
