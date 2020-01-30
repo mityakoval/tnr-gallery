@@ -1,7 +1,6 @@
 class ArtistsController < ApplicationController
   def index
     @artworks = Artwork.preview.includes(:artist).order('artists.name ASC')
-    @expandable = false
   end
 
   def show
