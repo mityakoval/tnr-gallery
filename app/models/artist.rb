@@ -1,6 +1,6 @@
 class Artist < ApplicationRecord
   
-  has_many :artworks
+  has_many :artworks, dependent: :destroy
   
   validates :name, presence: true
   
@@ -13,8 +13,8 @@ class Artist < ApplicationRecord
   def add_artwork(artwork)
     if self.preview_artwork.empty?
       artwork.is_preview = true
-      artwork.save
-      self.artworks << artwork
     end
+    artwork.artist = self
+    artwork.save
   end
 end

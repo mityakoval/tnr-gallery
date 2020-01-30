@@ -1,0 +1,44 @@
+.artworks-wrapper
+  - if @artworks.empty?
+    .empty-container
+      %p No artists were created yet
+  - else
+    - outer_column_counter = 0
+    - @artworks.to_a.in_groups_of(6, false).each do |column|
+      - col_counter = 0
+      - row_counter = 0
+      .artwork-row{ style: "top: #{1031 * outer_column_counter}px" }
+        - column.each.with_index do |artwork, i|
+          - even = ((i + 1) % 2 == 0) 
+          - artist = @artist || artwork.artist
+          - left = 33.33 * col_counter
+          - top = even ? ( 431 * row_counter ) : ( 600 * row_counter )
+          - if @expandable
+            .artwork-wrapper.expandable
+              .artwork{ style: "left: #{left}%; top: #{top}px; ", |
+              class: "#{even ? 'even' : 'odd'}" }
+                %a.collapse close
+                .overlay
+                .background
+                .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
+                - if @expandable
+                  .expanded-picture-container{ style: "background-image: url(\"#{url_for(artwork.picture)}\")" }
+                .picture-info
+                  %p.name= artwork.name
+                  %p.artist= artist.name
+          - else
+            = link_to artist_path(id: artist.id), class: "artwork-wrapper" do
+              .artwork{ style: "left: #{left}%; top: #{top}px; ", |
+              class: "#{even ? 'even' : 'odd'}" }
+                .overlay
+                .background
+                .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
+                .picture-info
+                  %p.name= artwork.name
+                  %p.artist= artist.name
+          - if col_counter == 2
+            - col_counter = 0
+            - row_counter += 1
+          - else
+            - col_counter += 1
+        - outer_column_counter += 1

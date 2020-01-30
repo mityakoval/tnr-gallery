@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'artworks/index'
+  get 'artworks/show'
   root 'artists#index'
   get 'artists/', to: 'artists#index'
   get 'artists/:id', to: 'artists#show', as: :artist
