@@ -11,7 +11,7 @@ class Admin::ArtworksController < AdminController
   
   def create
     artwork = Artwork.new(artworks_params)
-    
+    artwork.artist = @artist
     if artwork.save
       @artist.add_artwork(artwork)
       redirect_to admin_artwork_path(id: artwork.id)

@@ -13,8 +13,7 @@ class Artist < ApplicationRecord
   def add_artwork(artwork)
     if self.preview_artwork.empty?
       artwork.is_preview = true
+      artwork.save
     end
-    artwork.artist = self
-    artwork.save
   end
 end
