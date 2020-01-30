@@ -14,7 +14,7 @@
           -# %input.form-control#artwork_name{ placeholder: 'Name', type: 'text'}
           = f.text_area :description, class: 'form-control', placeholder: 'Description'
           -# %textarea.form-control#artwork_description{ placeholder: 'Description', rows: 4}
-          = f.file_field :picture, multiple: false, direct_upload: true
+          = f.file_field :picture, multiple: false
           -# %input.form-control#artwork_picture{ placeholder: 'Picture', type: 'file'}
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
