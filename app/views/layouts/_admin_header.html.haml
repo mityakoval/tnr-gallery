@@ -1,6 +1,6 @@
 .header
   %ul.nav.nav-pills#artistList
     %li.artist
-      %a{ data: { toggle: 'modal', target: "#newArtistModal" } } Add a new artist
+      = link_to "All artists", admin_root_path
     %li.artist
-      = link_to "Home", admin_root_path
+      %a{ data: { toggle: 'modal', target: "#newArtistModal" } } Add a new artist
