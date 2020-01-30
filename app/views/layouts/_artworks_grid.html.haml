@@ -17,7 +17,7 @@
             .artwork-wrapper.expandable
               .artwork{ style: "left: #{left}%; top: #{top}px; ", |
               class: "#{even ? 'even' : 'odd'}" }
-                %a.collapse close
+                %a.collapse.uppercase close
                 .overlay
                 .background
                 .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
