@@ -1,7 +1,6 @@
 .artworks-wrapper
   - if @artworks.empty?
     .empty-container
-      %p No artists were created yet
   - else
     - outer_column_counter = 0
     - @artworks.to_a.in_groups_of(6, false).each do |column|
