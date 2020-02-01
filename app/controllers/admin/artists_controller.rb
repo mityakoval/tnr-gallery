@@ -1,13 +1,16 @@
 class Admin::ArtistsController < AdminController
   
   before_action :add_breadcrumbs
+  before_action :set_artist, only: [:show, :edit, :update, :delete]
   
   def index
     @artists = Artist.with_preview_artwork
   end
 
   def show
-    @artist = Artist.find(params[:id])
+    @artworks = @artist.artworks
+    @artwork_link_to = :artwork
+    @new_artwork = Artwork.new
   end
 
   def new
@@ -33,14 +36,10 @@ class Admin::ArtistsController < AdminController
   end
 
   def edit
-    @artist = Artist.find(params[:id])
-    @artworks = @artist.artworks
-    @new_artwork = Artwork.new
+    @artworks = @artist.artworks    
   end
 
-  def update
-    @artist = Artist.find(params[:id])
-    
+  def update  
     if @artist.update(artist_params)
       redirect_to admin_artist_url(id: @artist.id)
     else
@@ -51,12 +50,18 @@ class Admin::ArtistsController < AdminController
   end
 
   def delete
+    @artist.destroy
+    redirect_to admin_artist_path
   end
   
   private
   
   def artist_params
     params.fetch(:artist, {}).permit(:name, :description)
+  end
+  
+  def set_artist
+    @artist = Artist.find(params[:id])
   end
   
   def add_breadcrumbs

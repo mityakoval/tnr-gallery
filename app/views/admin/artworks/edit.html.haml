@@ -1,19 +1,11 @@
-.artwork-info
-  %h1= @artwork.name
-  .controls
-    %p 
-      (
-      = link_to "Edit", admin_edit_artwork_path(id: @artwork.id)
-      |
-      = link_to "Delete", admin_delete_artwork_path(id: @artwork.id), method: :delete, class: 'danger', confirm: 'Are you sure'
-      ) 
-  .description
-    %h2 Description  
-    - if @artwork.description.blank?
-      %p.empty No description provided
-    - else
-      %p= @artwork.description
-  .image
-    %h2 Picture
-    = image_tag @artwork.picture.variant(resize: '500')
+.edit-artwork
+  = form_for [:admin, @artwork] do |f|
+    .errors
+      - flash.each do |message_type, message|
+        %div{:class => "alert alert-#{message_type}"}= message
+    = f.text_field :name, class: 'form-control edit-artist-name', placeholder: 'Name'
+    = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
+    = f.file_field :picture, multiple: false
+    = link_to "Cancel", admin_artwork_path(id: @artwork.id), class: 'btn btn-default cancel'
+    = f.button "Save", class: 'btn btn-black'
     

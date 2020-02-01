@@ -1,16 +1,19 @@
 class Admin::ArtworksController < AdminController
-  before_action :set_artist, only: [:create]
+  before_action :set_artist, only: [:create, :delete]
+  before_action :set_artwork, only: [:show, :edit, :update, :delete]
+  
+  def index
+    @artworks = Artwork.includes(:artist).order('artists.name ASC')
+  end
   
   def show
-    @artwork = Artwork.find(params[:id])
   end
   
   def edit
-    # code
   end
   
   def create
-    artwork = Artwork.new(artworks_params)
+    artwork = Artwork.new(artwork_params)
     artwork.artist = @artist
     if artwork.save
       @artist.add_artwork(artwork)
@@ -21,16 +24,21 @@ class Admin::ArtworksController < AdminController
   end
   
   def update
-    # code
+    if @artwork.update(artwork_params)
+      
+    else
+      
+    end
   end
   
   def delete
-    # code
+    @artwork.destroy
+    redirect_to admin_artworks_path(artist_id: @artist.id)
   end
   
   private
   
-  def artworks_params
+  def artwork_params
     params.fetch(:artwork, {}).permit(
       :name,
       :description,
@@ -40,5 +48,9 @@ class Admin::ArtworksController < AdminController
   
   def set_artist
     @artist = Artist.find(params[:artist_id])
+  end
+  
+  def set_artwork
+    @artwork = Artwork.find(params[:id])
   end
 end
