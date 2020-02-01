@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     post '/artists/:artist_id/artworks', to: 'artworks#create', as: :artworks
     get 'artworks/:id/edit', to: 'artworks#edit', as: :edit_artwork
     patch 'artworks/:id', to: 'artworks#update', as: :update_artwork
-    delete '/artists/:artist_idartworks/:id', to: 'artworks#delete', as: :delete_artwork
+    delete '/artists/:artist_id/artworks/:id', to: 'artworks#delete', as: :delete_artwork
   end
 end
