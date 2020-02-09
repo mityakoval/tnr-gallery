@@ -17,14 +17,20 @@
               .artwork{ style: "left: #{left}%; top: #{top}px; ", |
               class: "#{even ? 'even' : 'odd'}" }
                 %a.collapse.uppercase close
-                .overlay
                 .background
                 .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
                 - if @expandable
                   .expanded-picture-container{ style: "background-image: url(\"#{url_for(artwork.picture)}\")" }
-                .picture-info
-                  %p.name= artwork.name
-                  %p.artist= artist.name
+                  .full-picture-info
+                    .desc-background
+                    %p.name= artwork.name
+                    %p.description= artwork.description
+                    %p.price= artwork.price
+                - else
+                  .overlay
+                  .picture-info
+                    %p.name= artwork.name
+                    %p.artist= artist.name
           - else
             = link_to artist_path(id: artist.id), class: "artwork-wrapper" do
               .artwork{ style: "left: #{left}%; top: #{top}px; ", |

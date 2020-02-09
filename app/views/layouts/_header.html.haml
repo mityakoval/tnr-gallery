@@ -1,9 +1,8 @@
 .header
+  .logo-container
+    = link_to root_path, class: "logo" do
+      = image_tag 'up_1.jpg'
   %ul.nav.nav-pills#artistList
     - @artists.each do |artist|
       %li.artist
         =link_to artist.name, artist
-  .logo-container
-    = link_to root_path, class: "logo" do
-      = image_tag 'up_1.jpg'
-      %p.catalogue.uppercase Catalogue

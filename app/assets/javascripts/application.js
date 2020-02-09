@@ -50,8 +50,11 @@ $(document).on('click', '.artwork-wrapper.expandable', function() {
   $artwork.removeClass('pre-expanded');
   $artwork.css(
     {
-      height: ($(window).height() - 40),
-      top: -(first_artwork_offset - 33)
+      height: ($(window).height()),
+      top: -(first_artwork_offset),
+      left: '-15px',
+      width: 'calc(100% + 30px)',
+      
     }
   )
   $artwork.parent().removeClass('expandable');
@@ -62,7 +65,9 @@ $(document).on('click', '.artwork-wrapper .collapse', function() {
   $artwork.removeClass('expanded');
   $artwork.css({
     height: '',
-    top: expanded_artwork_top
+    top: expanded_artwork_top,
+    left: '',
+    width: ''
   })
   expanded_artwork_top = 0;
   $('.artwork.inivisible').removeClass('inivisible');

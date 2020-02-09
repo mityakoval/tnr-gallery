@@ -1,2 +1,17 @@
 = provide(:page_title, 'Artists')
-= render 'layouts/artworks_grid'
+.with-contact
+  %p.centered-text.artist-list-preface Archive of available works by artist in alphabetical order
+  %br
+  %br
+  = render 'layouts/artworks_grid'
+  .contact
+    %p
+      For further information please contact
+      %span.bold Liza German
+      [
+      %a{:href => "tel:+380 (67) 262 49 50"} +380 (67) 262 49 50
+      |
+      %a{:href => "mailto:german@thenakedroom.com"} german@thenakedroom.com 
+      ]
+      or visit us at 
+      = link_to "THE NAKED ROOM", "http://thenakedroom.com/", class: 'bold'
