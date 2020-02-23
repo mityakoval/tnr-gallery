@@ -53,6 +53,9 @@ task :setup do
     
     comment 'Upload database.yml to shared path'
     command "scp config/database.yml #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/config"
+    
+    comment 'Upload puma.rb to shared path'
+    command "scp config/puma.rb #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/config"
   end
   
   comment "Setup tmp/"
@@ -94,10 +97,6 @@ task :deploy do
 
     on :launch do
       invoke :'puma:restart'
-      in_path(fetch(:current_path)) do
-        # command %{mkdir -p tmp/}
-        # command %{touch tmp/restart.txt}
-      end
     end
   end
 
