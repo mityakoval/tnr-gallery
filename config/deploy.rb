@@ -46,11 +46,13 @@ end
 namespace :credentials do
   task :upload do
     run :local do
+      comment 'Upload master.key to shared path'
       command "scp config/master.key #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/"
     end
   end
   
   task :symlink do
+    comment 'Symlink master.key'
     command "test -f #{fetch(:current_path)}/config/master.key || ln -sf #{fetch(:current_path)}/config/master.key #{fetch(:shared_path)}/master.key"
   end
 end
