@@ -47,7 +47,7 @@ namespace :credentials do
   task :upload do
     run :local do
       comment 'Upload master.key to shared path'
-      command "scp config/master.key #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/"
+      command "scp config/master.key #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}"
     end
   end
   
@@ -68,7 +68,7 @@ task :deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    invoke :'credentials:symlink'
+    # invoke :'credentials:symlink'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
