@@ -51,7 +51,7 @@ namespace :credentials do
   end
   
   task :symlink do
-    command "ln -sf #{fetch(:shared_path)}/master.key #{fetch(:current_path)}/config/master.key"
+    command "test -f #{fetch(:current_path)}/config/master.key || ln -sf #{fetch(:shared_path)}/master.key #{fetch(:current_path)}/config/master.key"
   end
 end
 
