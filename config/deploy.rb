@@ -27,8 +27,8 @@ set :forward_agent, true     # SSH forward_agent.
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/credentials.yml.enc', 'config/puma.rb', 'config/master.key')
 
-set :puma_state, -> { "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/sockets/puma.state" }
-set :puma_pid, -> { "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/pids/puma.pid" }
+# set :puma_state, -> { "#{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/sockets/puma.state" }
+# set :puma_pid, -> { "#{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/pids/puma.pid" }
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
@@ -39,11 +39,6 @@ task :remote_environment do
 
   # For those using RVM, use this to load an RVM version@gemset.
   invoke :'rvm:use', 'default'
-  
-  queue! %(mkdir -p "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/sockets")
-  queue! %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/sockets")
-  queue! %(mkdir -p "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/pids")
-  queue! %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/pids")
 end
 
 # Put any custom commands you need to run at setup
@@ -59,6 +54,12 @@ task :setup do
     comment 'Upload database.yml to shared path'
     command "scp config/database.yml #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/config"
   end
+  
+  comment "Setup tmp/"
+  command "mkdir -p #{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/sockets"
+  command "chmod g+rx,u+rwx #{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/sockets"
+  command "mkdir -p #{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/pids"
+  command "chmod g+rx,u+rwx #{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/pids"
 end
 
 namespace :credentials do
