@@ -27,8 +27,8 @@ set :forward_agent, true     # SSH forward_agent.
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/credentials.yml.enc', 'config/puma.rb', 'config/master.key')
 
-# set :puma_state, -> { "#{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/sockets/puma.state" }
-# set :puma_pid, -> { "#{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/pids/puma.pid" }
+set :puma_state, -> { "#{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/sockets/puma.state" }
+set :puma_pid, -> { "#{fetch(:deploy_to)}/#{fetch(:shared_path)}/tmp/pids/puma.pid" }
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
