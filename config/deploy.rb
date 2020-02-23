@@ -39,6 +39,11 @@ task :remote_environment do
 
   # For those using RVM, use this to load an RVM version@gemset.
   invoke :'rvm:use', 'default'
+  
+  queue! %(mkdir -p "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/sockets")
+  queue! %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/sockets")
+  queue! %(mkdir -p "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/pids")
+  queue! %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/pids")
 end
 
 # Put any custom commands you need to run at setup
@@ -89,8 +94,8 @@ task :deploy do
     on :launch do
       invoke :'puma:restart'
       in_path(fetch(:current_path)) do
-        command %{mkdir -p tmp/}
-        command %{touch tmp/restart.txt}
+        # command %{mkdir -p tmp/}
+        # command %{touch tmp/restart.txt}
       end
     end
   end
