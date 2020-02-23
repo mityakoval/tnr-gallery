@@ -20,7 +20,15 @@
                 .background
                 .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
                 - if @expandable
-                  .expanded-picture-container{ style: "background-image: url(\"#{url_for(artwork.picture)}\")" }
+                  .expanded-picture-container-wrapper
+                    -# .expanded-picture-container{ style: "background-image: url(\"#{url_for(artwork.picture)}\")" }
+                    .expanded-picture-container
+                      = image_tag artwork.picture
+                      .expanded-picture-info
+                        .desc-background
+                        %p.name= artwork.name
+                        %p.description= artwork.description
+                        %p.price= artwork.price
                   .full-picture-info
                     .desc-background
                     %p.name= artwork.name
