@@ -2,6 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/puma'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -23,8 +24,11 @@ set :forward_agent, true     # SSH forward_agent.
 # Shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 # Some plugins already add folders to shared_dirs like `mina/rails` add `public/assets`, `vendor/bundle` and many more
 # run `mina -d` to see all folders and files already included in `shared_dirs` and `shared_files`
-# set :shared_dirs, fetch(:shared_dirs, []).push('public/assets')
-set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/master.key')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
+set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/credentials.yml.enc', 'config/puma.rb', 'config/master.key')
+
+set :puma_state, -> { "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/sockets/puma.state" }
+set :puma_pid, -> { "#{fetch(:deploy_to)}/#{fetch(:shared)}/tmp/pids/puma.pid" }
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
@@ -40,7 +44,16 @@ end
 # Put any custom commands you need to run at setup
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
-  # command %{rbenv install 2.3.0 --skip-existing}
+  run :local do  
+    comment 'Upload master.key to shared path'
+    command "scp config/master.key #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/config"
+    
+    comment 'Upload credentials.yml.enc to shared path'
+    command "scp config/credentials.yml.enc #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/config"
+    
+    comment 'Upload database.yml to shared path'
+    command "scp config/database.yml #{fetch(:user)}@#{fetch(:domain)}:#{fetch(:shared_path)}/config"
+  end
 end
 
 namespace :credentials do
@@ -74,6 +87,7 @@ task :deploy do
     invoke :'deploy:cleanup'
 
     on :launch do
+      invoke :'puma:restart'
       in_path(fetch(:current_path)) do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}

@@ -13,7 +13,6 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  socket: /tmp/mysql.sock
   
 
 development:
@@ -21,6 +20,7 @@ development:
   database: tnr_gallery_development
   username: <%= Rails.application.credentials.dig(:local, :mysql_user) %>
   password: <%= Rails.application.credentials.dig(:local, :mysql_password) %>
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -30,6 +30,7 @@ test:
   database: tnr_gallery_test
   username: <%= Rails.application.credentials.dig(:local, :mysql_user) %>
   password: <%= Rails.application.credentials.dig(:local, :mysql_password) %>
+  socket: /tmp/mysql.sock
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -52,6 +53,6 @@ test:
 #
 production:
   <<: *default
-  database: tnr_gallery_production
-  username: tnr_gallery
-  password: <%= ENV['TNR_GALLERY_DATABASE_PASSWORD'] %>
+  database: <%= Rails.application.credentials.dig(:production, :database_name) %>
+  username: <%= Rails.application.credentials.dig(:production, :mysql_user) %>
+  password: <%= Rails.application.credentials.dig(:production, :mysql_pqssword) %>
