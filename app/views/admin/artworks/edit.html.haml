@@ -1,11 +1,15 @@
 .edit-artwork
-  = form_for [:admin, @artwork] do |f|
-    .errors
-      - flash.each do |message_type, message|
-        %div{:class => "alert alert-#{message_type}"}= message
-    = f.text_field :name, class: 'form-control edit-artist-name', placeholder: 'Name'
-    = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
-    = f.file_field :picture, multiple: false
-    = link_to "Cancel", admin_artwork_path(id: @artwork.id), class: 'btn btn-default cancel'
-    = f.button "Save", class: 'btn btn-black'
-    
+  .artwork-info.col-md-8
+    = form_for [:admin, @artwork] do |f|
+      .errors
+        - flash.each do |message_type, message|
+          %div{:class => "alert alert-#{message_type}"}= message
+      = f.text_field :name, class: 'form-control edit-artist-name', placeholder: 'Name'
+      = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
+      = f.text_field :price, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Price'
+      = f.file_field :picture, multiple: false
+      = link_to "Cancel", admin_artwork_path(id: @artwork.id), class: 'btn btn-default cancel'
+      = f.button "Save", class: 'btn btn-black'
+  .artwork-photo.col-md-4
+    .picture-container
+      = image_tag @artwork.picture

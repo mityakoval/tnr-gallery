@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+.header.admin {
+  #artistList {
+    padding-top: 50px;
+  }
+}
+
 .modal {
   .modal-body {
     padding: 15px 25px;
@@ -17,9 +24,20 @@
 }
 
 .edit-artist, .edit-artwork {
-  margin-top: 100px;
-  display: block;
-  width: 40%;
+  .artwork-info {
+    margin-top: 0;
+  }
+  
+  .artwork-photo {
+    .picture-container {
+      border: 3px solid black;
+      padding: 7px;
+      
+      img {
+        width: 100%;  
+      }
+    }
+  }
   
   form {
     .form-control {

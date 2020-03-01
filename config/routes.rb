@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'sessions/new'
+  end
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/delete'
@@ -10,6 +13,11 @@ Rails.application.routes.draw do
   
   namespace :admin do
     root 'artists#index'
+    
+    get 'login', to: 'sessions#new', as: :login
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#delete', as: :logout
+    
     get '/artists', to: 'artists#index', as: :all_artists
     get 'artists/new', to: 'artists#new', as: :new_artist
     get 'artists/:id', to: 'artists#show', as: :artist
