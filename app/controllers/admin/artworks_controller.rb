@@ -42,7 +42,8 @@ class Admin::ArtworksController < AdminController
     params.fetch(:artwork, {}).permit(
       :name,
       :description,
-      :picture
+      :picture,
+      :price
     )
   end
   
