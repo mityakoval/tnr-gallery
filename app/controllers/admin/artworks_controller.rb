@@ -25,9 +25,10 @@ class Admin::ArtworksController < AdminController
   
   def update
     if @artwork.update(artwork_params)
-      
+      redirect_to admin_artist_url(id: @artwork.id)
     else
-      
+      flash.now[:danger] = "unable to update"
+      render :edit
     end
   end
   
