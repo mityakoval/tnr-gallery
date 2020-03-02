@@ -28,6 +28,10 @@ html, body {
   min-height: 100%;
 }
 
+#mainContainer {
+  padding: 0;
+}
+
 a {
   color: black;
   
@@ -92,8 +96,8 @@ a {
   #artistList {
     display: block;
     text-align: center;
-    padding-top: 100px;
-    max-width: 90%;
+    padding-top: 111px;
+    max-width: 92%;
     margin: 0 auto;
     
     .artist {
@@ -123,7 +127,7 @@ a {
       text-decoration: none;
       position: absolute;
       top: -45px;
-      left: -1px;
+      left: -15px;
       img {
         width: 225px;
       }
