@@ -73,9 +73,10 @@ namespace :deploy do
   end
 
   # before :starting,     :check_revision
+  before :finishing,    'puma:stop'
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  before  'puma:start',    'puma:stop'
+  after  :finishing,    'puma:restart'
 end
 
 namespace :credentials do
