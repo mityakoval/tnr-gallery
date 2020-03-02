@@ -12,6 +12,7 @@
               %div{:class => "alert alert-#{message_type}"}= message
           = f.text_field :name, class: 'form-control', placeholder: 'Name'
           = f.text_area :description, class: 'form-control', placeholder: 'Description'
+          = f.text_field :price, class: 'form-control', placeholder: 'Price'
           = f.file_field :picture, multiple: false
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

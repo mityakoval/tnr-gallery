@@ -34,7 +34,7 @@ class Admin::ArtworksController < AdminController
   
   def delete
     @artwork.destroy
-    redirect_to admin_artworks_path(artist_id: @artist.id)
+    redirect_to admin_artist_path(id: @artist.id)
   end
   
   private
