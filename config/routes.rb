@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     delete 'artists/:id', to: 'artists#delete', as: :delete_artist
     
     get '/artworks/index', to: 'artworks#index', as: :all_artworks
-    get '/artworks/:id', to: 'artworks#show', as: :artwork
+    get '/artists/:artist_id/artworks/:id', to: 'artworks#show', as: :artwork
     post '/artists/:artist_id/artworks', to: 'artworks#create', as: :artworks
     get 'artworks/:id/edit', to: 'artworks#edit', as: :edit_artwork
     patch 'artworks/:id', to: 'artworks#update', as: :update_artwork

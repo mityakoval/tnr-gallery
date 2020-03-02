@@ -27,7 +27,7 @@
                   %p.name= artwork.name
                   %p.artist= artist.name
           - else
-            - link = @artwork_link_to == :artwork ? admin_artwork_path(id: artwork.id) : admin_artist_path(id: artist.id)
+            - link = @artwork_link_to == :artwork ? admin_artwork_path(artist_id: @artist.id, id: artwork.id) : admin_artist_path(id: artist.id)
             = link_to link, class: "artwork-wrapper" do
               .artwork{ style: "left: #{left}%; top: #{top}px; ", |
               class: "#{even ? 'even' : 'odd'}" }

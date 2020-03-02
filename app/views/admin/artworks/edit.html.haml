@@ -8,7 +8,7 @@
       = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
       = f.text_field :price, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Price'
       = f.file_field :picture, multiple: false
-      = link_to "Cancel", admin_artwork_path(id: @artwork.id), class: 'btn btn-default cancel'
+      = link_to "Cancel", admin_artwork_path(artist_id: @artist.id, id: artwork.id)
       = f.button "Save", class: 'btn btn-black'
   .artwork-photo.col-md-4
     .picture-container

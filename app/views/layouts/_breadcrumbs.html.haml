@@ -1,9 +1,12 @@
-.breadcrumbs
-  - @breadcrumbs.each.with_index do |breadcrumb, i|
-    - current = (i == breadcrumb.length - 1)
-    - if current
-      %a.breadcrumb.current= breadcrumb[:text]
-    - else
-      = link_to breadcrumb[:text], breadcrumb[:path], class: 'breadcrumb'
-      >
+- if @show_breadcrumbs
+  .breadcrumbs
+    - @breadcrumbs.each.with_index do |breadcrumb, i|
+      - last_link = (i == breadcrumb.length - 1)
+      - @current_link
+      - if @current_link
+        %a.breadcrumb.current= breadcrumb[:text]
+      - else
+        = link_to breadcrumb[:text], breadcrumb[:path], class: 'breadcrumb'
+      - if !last_link
+        >
       

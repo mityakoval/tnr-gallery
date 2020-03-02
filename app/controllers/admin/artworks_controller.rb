@@ -1,12 +1,15 @@
 class Admin::ArtworksController < AdminController
   before_action :set_artist, only: [:create, :delete]
   before_action :set_artwork, only: [:show, :edit, :update, :delete]
+  before_action :add_breadcrumbs
+  before_action :show_breadcrumbs
   
   def index
     @artworks = Artwork.includes(:artist).order('artists.name ASC')
   end
   
   def show
+    @current_link = false
   end
   
   def edit
@@ -17,7 +20,7 @@ class Admin::ArtworksController < AdminController
     artwork.artist = @artist
     if artwork.save
       @artist.add_artwork(artwork)
-      redirect_to admin_artwork_path(id: artwork.id)
+      redirect_to admin_artwork_path(artist_id: @artist.id, id: artwork.id)
     else
       
     end
@@ -25,7 +28,7 @@ class Admin::ArtworksController < AdminController
   
   def update
     if @artwork.update(artwork_params)
-      redirect_to admin_artwork_path(id: @artwork.id)
+      redirect_to admin_artwork_path(artist_id: @artist.id, id: artwork.id)
     else
       flash.now[:danger] = "unable to update"
       render :edit
@@ -54,5 +57,13 @@ class Admin::ArtworksController < AdminController
   
   def set_artwork
     @artwork = Artwork.find(params[:id])
+  end
+  
+  def add_breadcrumbs
+    add_breadcrumb @artist.name, admin_artist_path(id: @artist.id) if @artist ||= Artist.find_by(id: params[:artist_id])
+  end
+  
+  def show_breadcrumbs
+    @show_breadcrumbs = true
   end
 end

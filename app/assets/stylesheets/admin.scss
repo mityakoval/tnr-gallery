@@ -23,6 +23,15 @@
   }
 }
 
+.breadcrumbs {
+  .breadcrumb {
+    
+    &.current {
+      text-decoration: none;
+    }
+  }
+}
+
 .edit-artist, .edit-artwork {
   .artwork-info {
     margin-top: 0;
