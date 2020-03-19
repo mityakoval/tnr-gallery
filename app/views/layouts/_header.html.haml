@@ -1,7 +1,7 @@
 .header
   .logo-container
     = link_to root_path, class: "logo" do
-      = image_tag 'logo.png'
+      = image_tag 'logo_cropped.png'
   %ul.nav.nav-pills#artistList
     - @artists.each do |artist|
       %li.artist

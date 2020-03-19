@@ -1,15 +1,3 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
-// vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file. JavaScript code in this file should be added after the last require_* statement.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require rails-ujs
 //= require bootstrap
@@ -29,6 +17,7 @@ function invoke(url, method, data, success, error){
 }
 
 var expanded_artwork_top;
+var expanded_artwork_left;
 var $artwork;
 
 function showErrors(errorContainer, errors) {
@@ -43,7 +32,10 @@ function showErrors(errorContainer, errors) {
 $(document).on('click', '.artwork-wrapper.expandable', function() {
   var $artwork = $(this).find('.artwork');
   expanded_artwork_top = parseInt($artwork.css('top'));
+  expanded_artwork_left = parseInt($artwork.css('left'));
+  console.log(expanded_artwork_top);
   var first_artwork_offset = $(".artworks-wrapper").first().offset().top;
+  console.log(first_artwork_offset);
   $artwork.addClass('pre-expanded');
   $('.artwork').not('.pre-expanded').addClass('inivisible');
   $artwork.addClass('expanded');
@@ -51,7 +43,7 @@ $(document).on('click', '.artwork-wrapper.expandable', function() {
   $artwork.css(
     {
       height: ($(window).height()),
-      top: -(first_artwork_offset),
+      top: 0,
       left: '-15px',
       width: 'calc(100% + 30px)',
       
@@ -66,7 +58,7 @@ $(document).on('click', '.artwork-wrapper .collapse', function() {
   $artwork.css({
     height: '',
     top: expanded_artwork_top,
-    left: '',
+    left: expanded_artwork_left,
     width: ''
   })
   expanded_artwork_top = 0;
