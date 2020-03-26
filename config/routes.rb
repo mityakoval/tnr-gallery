@@ -29,8 +29,8 @@ Rails.application.routes.draw do
     get '/artworks/index', to: 'artworks#index', as: :all_artworks
     get '/artists/:artist_id/artworks/:id', to: 'artworks#show', as: :artwork
     post '/artists/:artist_id/artworks', to: 'artworks#create', as: :artworks
-    get 'artworks/:id/edit', to: 'artworks#edit', as: :edit_artwork
-    patch 'artworks/:id', to: 'artworks#update', as: :update_artwork
+    get 'artists/:artist_id/artworks/:id/edit', to: 'artworks#edit', as: :edit_artwork
+    patch 'artists/:artist_id/artworks/:id', to: 'artworks#update', as: :update_artwork
     delete '/artists/:artist_id/artworks/:id', to: 'artworks#delete', as: :delete_artwork
   end
 end

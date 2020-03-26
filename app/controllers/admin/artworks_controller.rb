@@ -1,5 +1,5 @@
 class Admin::ArtworksController < AdminController
-  before_action :set_artist, only: [:create, :delete]
+  before_action :set_artist, only: [:show, :create, :delete, :update, :edit]
   before_action :set_artwork, only: [:show, :edit, :update, :delete]
   before_action :add_breadcrumbs
   before_action :show_breadcrumbs
@@ -13,6 +13,7 @@ class Admin::ArtworksController < AdminController
   end
   
   def edit
+    @artist = @artwork.artist
   end
   
   def create
@@ -28,7 +29,7 @@ class Admin::ArtworksController < AdminController
   
   def update
     if @artwork.update(artwork_params)
-      redirect_to admin_artwork_path(artist_id: @artist.id, id: artwork.id)
+      redirect_to admin_artwork_path(artist_id: @artist.id, id: @artwork.id)
     else
       flash.now[:danger] = "unable to update"
       render :edit
@@ -64,6 +65,6 @@ class Admin::ArtworksController < AdminController
   end
   
   def show_breadcrumbs
-    @show_breadcrumbs = true
+    @show_breadcrumbs = false
   end
 end

@@ -1,6 +1,6 @@
 .edit-artwork
   .artwork-info.col-md-8
-    = form_for [:admin, @artwork] do |f|
+    = form_for [:admin, @artwork], url: admin_update_artwork_path(id: @artwork.id) do |f|
       .errors
         - flash.each do |message_type, message|
           %div{:class => "alert alert-#{message_type}"}= message
@@ -8,7 +8,7 @@
       = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
       = f.text_field :price, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Price'
       = f.file_field :picture, multiple: false
-      = link_to "Cancel", admin_artwork_path(artist_id: @artist.id, id: artwork.id)
+      = link_to "Cancel", admin_artwork_path(artist_id: @artist.id, id: @artwork.id)
       = f.button "Save", class: 'btn btn-black'
   .artwork-photo.col-md-4
     .picture-container

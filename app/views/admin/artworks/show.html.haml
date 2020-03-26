@@ -3,7 +3,7 @@
   .controls
     %p 
       (
-      = link_to "Edit", admin_edit_artwork_path(id: @artwork.id)
+      = link_to "Edit", admin_edit_artwork_path(artist_id: @artist.id, id: @artwork.id)
       |
       = link_to "Delete", admin_delete_artwork_path(artist_id: @artwork.artist.id, id: @artwork.id), method: :delete, class: 'danger', confirm: 'Are you sure'
       ) 
