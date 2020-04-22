@@ -4,7 +4,7 @@ class Admin::ArtistsController < AdminController
   before_action :set_artist, only: [:show, :edit, :update, :delete]
   
   def index
-    @artists = Artist.with_preview_artwork
+    @artists = Artist.all
   end
 
   def show
@@ -57,7 +57,7 @@ class Admin::ArtistsController < AdminController
   private
   
   def artist_params
-    params.fetch(:artist, {}).permit(:name, :description)
+    params.fetch(:artist, {}).permit(:full_name, :description)
   end
   
   def set_artist
@@ -66,6 +66,6 @@ class Admin::ArtistsController < AdminController
   
   def add_breadcrumbs
     @artist = Artist.find_by(id: params[:id])
-    add_breadcrumb @artist.name, nil if @artist
+    add_breadcrumb @artist.full_name, nil if @artist
   end
 end

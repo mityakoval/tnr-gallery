@@ -5,7 +5,7 @@ class Admin::ArtworksController < AdminController
   before_action :show_breadcrumbs
   
   def index
-    @artworks = Artwork.includes(:artist).order('artists.name ASC')
+    @artworks = Artwork.includes(:artist).order('artists.last_name ASC')
   end
   
   def show
@@ -61,7 +61,7 @@ class Admin::ArtworksController < AdminController
   end
   
   def add_breadcrumbs
-    add_breadcrumb @artist.name, admin_artist_path(id: @artist.id) if @artist ||= Artist.find_by(id: params[:artist_id])
+    add_breadcrumb @artist.full_name, admin_artist_path(id: @artist.id) if @artist ||= Artist.find_by(id: params[:artist_id])
   end
   
   def show_breadcrumbs
