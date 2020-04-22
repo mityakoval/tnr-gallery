@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
   
   def load_artists
-    @artists = Artist.all.order(:name)
+    @artists = [Artist.not_categories.order(:last_name).to_a, Artist.categories.to_a].flatten
   end
   
   def expandable

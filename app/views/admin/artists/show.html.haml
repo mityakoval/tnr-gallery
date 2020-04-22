@@ -10,7 +10,7 @@
           .errors
             - flash.each do |message_type, message|
               %div{:class => "alert alert-#{message_type}"}= message
-          = f.text_field :name, class: 'form-control', placeholder: 'Name'
+          = f.text_field :full_name, class: 'form-control', placeholder: 'Name'
           = f.text_area :description, class: 'form-control', placeholder: 'Description'
           = f.text_field :price, class: 'form-control', placeholder: 'Price'
           = f.file_field :picture, multiple: false
@@ -19,7 +19,7 @@
           = f.submit class: 'btn btn-black'
 .admin-artist-page
   .artist-info
-    %h1.name= @artist.name
+    %h1.name= @artist.full_name
     .controls
       %p 
         (

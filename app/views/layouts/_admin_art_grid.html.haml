@@ -25,7 +25,7 @@
                   .expanded-picture-container{ style: "background-image: url(\"#{url_for(artwork.picture)}\")" }
                 .picture-info
                   %p.name= artwork.name
-                  %p.artist= artist.name
+                  %p.artist= artist.full_name
           - else
             - link = @artwork_link_to == :artwork ? admin_artwork_path(artist_id: @artist.id, id: artwork.id) : admin_artist_path(id: artist.id)
             = link_to link, class: "artwork-wrapper" do
@@ -36,7 +36,7 @@
                 .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
                 .picture-info
                   %p.name= artwork.name
-                  %p.artist= artist.name
+                  %p.artist= artist.full_name
           - if col_counter == 2
             - col_counter = 0
             - row_counter += 1

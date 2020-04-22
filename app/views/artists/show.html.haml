@@ -1,7 +1,7 @@
-= provide(:page_title, @artist.name)
+= provide(:page_title, @artist.full_name)
 .artist-page.with-contact
   .info
-    %h1.name.uppercase= @artist.name
+    %h1.name.uppercase= @artist.full_name
     %p.description.italic= @artist.description
   .artist-artworks
     = render 'layouts/artworks_grid'

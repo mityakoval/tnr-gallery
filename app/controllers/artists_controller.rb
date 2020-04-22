@@ -1,6 +1,6 @@
 class ArtistsController < ApplicationController
   def index
-    @artworks = Artwork.preview.includes(:artist).order('artists.name ASC')
+    @artworks = Artwork.preview.includes(:artist).order('artists.last_name ASC')
   end
 
   def show

@@ -3,7 +3,7 @@
     .errors
       - flash.each do |message_type, message|
         %div{:class => "alert alert-#{message_type}"}= message
-    = f.text_field :name, class: 'form-control edit-artist-name', placeholder: 'Name'
+    = f.text_field :full_name, class: 'form-control edit-artist-name', placeholder: 'Name'
     = f.text_area :description, class: 'form-control edit-artist-description', rows: 4, placeholder: 'Description'
     = link_to "Cancel", admin_artist_path(id: @artist.id), class: 'btn btn-default cancel'
     = f.button "Save", class: 'btn btn-black'

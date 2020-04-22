@@ -37,7 +37,7 @@
                   .overlay
                   .picture-info
                     %p.name= artwork.name
-                    %p.artist= artist.name
+                    %p.artist= artist.full_name
           - else
             = link_to artist_path(id: artist.id), class: "artwork-wrapper" do
               .artwork{ style: "left: #{left}%; top: #{top}px; ", |
@@ -47,7 +47,7 @@
                 .picture-container{ style: "background-image: url(\"#{url_for(artwork.picture.variant(resize: '400'))}\")" }
                 .picture-info
                   %p.name= artwork.name
-                  %p.artist= artist.name
+                  %p.artist= artist.full_name
           - if col_counter == 2
             - col_counter = 0
             - row_counter += 1
