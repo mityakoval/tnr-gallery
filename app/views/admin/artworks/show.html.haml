@@ -13,7 +13,7 @@
       %p.empty No description provided
     - else
       %p= @artwork.description
-    %h3= "EUR #{@artwork.price}"
+    %h3= "#{@artist.currency} #{@artwork.price}"
   .image
     %h2 Picture
     = image_tag @artwork.picture.variant(resize: '500')

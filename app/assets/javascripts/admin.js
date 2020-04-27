@@ -2,8 +2,9 @@ $(document).on('turbolinks:load', function() {
     $("#createArtistButton").click(function(e) {
       data = {
         artist: {
-          name: $("#artist_name").val(),
-          description: $("#artist_description").val()
+          full_name: $("#artist_name").val(),
+          description: $("#artist_description").val(),
+          currency: $("#artist_currency").val()
         }
       }
       

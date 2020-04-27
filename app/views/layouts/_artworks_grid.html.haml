@@ -23,7 +23,7 @@
                   .full-picture-info
                     %p.name= artwork.name
                     %p.description= artwork.description
-                    %p.price= "EUR #{artwork.price}"
+                    %p.price= "#{artist.currency} #{artwork.price}"
                   .expanded-picture-container-wrapper
                     -# .expanded-picture-container{ style: "background-image: url(\"#{url_for(artwork.picture)}\")" }
                     .expanded-picture-container
@@ -32,7 +32,7 @@
                         -# .desc-background
                         %p.name= artwork.name
                         %p.description= artwork.description
-                        %p.price= "EUR #{artwork.price}"
+                        %p.price= "#{artist.currency} #{artwork.price}"
                 - else
                   .overlay
                   .picture-info

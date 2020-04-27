@@ -5,5 +5,6 @@
     %div{:class => "alert alert-#{message_type}"}= message
   = f.text_field :full_name, class: 'form-control', placeholder: 'Name'
   = f.text_field :description, class: 'form-control', placeholder: 'Description'
+  = f.text_field :currency, class: 'form-control', placeholder: 'Currency'
   = f.button "Create", class: "btn btn-success"
   

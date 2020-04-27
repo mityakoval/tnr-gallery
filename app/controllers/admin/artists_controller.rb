@@ -51,13 +51,13 @@ class Admin::ArtistsController < AdminController
 
   def delete
     @artist.destroy
-    redirect_to admin_artist_path
+    redirect_to admin_all_artists_path
   end
   
   private
   
   def artist_params
-    params.fetch(:artist, {}).permit(:full_name, :description)
+    params.fetch(:artist, {}).permit(:full_name, :description, :is_category, :currency)
   end
   
   def set_artist
