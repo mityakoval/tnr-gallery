@@ -114,6 +114,10 @@ a {
         border-radius: 0;
         background: none;
         
+        &.category {
+          color: #676767;
+        }
+        
         &:hover {
           text-decoration: underline;
         }
